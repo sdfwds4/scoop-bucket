@@ -1,0 +1,22 @@
+{
+    "homepage": "https://office.qq.com/",
+    "description": "TIM",
+    "version": "3.1.0",
+    "license": "Freeware",
+    "url": "https://dldir1.qq.com/qqfile/qq/TIM3.1.0/TIM3.1.0.21781.exe#/dl.7z",
+    "hash": "3c687ff13a6646093b9a30c51801639d47a1c28976048ada0ba59edbc4ac1d9b",
+    "post_install": "Remove-Item \"$dir\\`$PLUGINSDIR\" -Recurse -Force",
+    "shortcuts": [
+        [
+            "tim.exe",
+            "tim"
+        ]
+    ],
+    "checkver": {
+        "regex": "TIM([\\d.]+).exe"
+    },
+    "autoupdate": {
+        "url": "https://dldir1.qq.com/qqfile/qq/TIM3.1.0/TIM$version.exe#/dl.7z"
+    },
+    "notes": "We don't persist your tim data, they are still storaged in '%LOCALAPPDATA%\\Tencent\\tim'."
+}

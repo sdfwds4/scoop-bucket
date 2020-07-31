@@ -1,0 +1,28 @@
+{
+    "version": "12.0.1458.0",
+    "description": "Fast, secure, and free web browser, built for the modern web.",
+    "homepage": "https://www.google.com/chrome/",
+    "license": "Freeware",
+    "url": "http://down.360safe.com/cse/360cse_12.0.1458.0.exe#/dl.7z",
+    "hash": "3ce819c5344625b6be12d601489b0de543e75af3cc11b897340f56147dd3f8c4",
+    "installer": {
+        "script": [
+            "Expand-7zipArchive \"$dir\\chrome.7z\" \"$dir\" -Removal",
+            "Move-Item \"$dir\\Chrome-bin\\*\" \"$dir\"",
+            "Remove-Item \"$dir\\Chrome-bin\" -Force -Recurse"
+        ]
+    },
+    "bin": "360chrome.exe",
+    "shortcuts": [
+        [
+            "360chrome.exe",
+            "360极速浏览器"
+        ]
+    ],
+    "checkver": {
+        "regex": "360cse_([\\d.]+).exe"
+    },
+    "autoupdate": {
+        "url": "http://down.360safe.com/cse/360cse_$version.exe#/dl.7z"
+    }
+}

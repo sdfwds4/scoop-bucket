@@ -5,11 +5,32 @@
     "license": "Freeware",
     "url": "https://dldir1.qq.com/qqfile/qq/TIM3.1.0/TIM3.1.0.21781.exe#/dl.7z",
     "hash": "342c090ab6d173b5fb8ac51fab167be2eda817205749fc64153bd9d184d6cd32",
-    "post_install": "Remove-Item \"$dir\\`$PLUGINSDIR\" -Recurse -Force",
+    "installer": {
+        "script": [
+            "$qqRoaming = \"$env:APPDATA\\Tencent\\TIM\"",
+            "if (!(Test-Path $qqRoaming)) {",
+            "    New-Item -Path \"$qqRoaming\" -ItemType Directory | Out-Null",
+            "} else {",
+            "    Get-ChildItem -Path \"$dir\\Application Data\\Tencent\\TIM\" -Name | ForEach-Object {",
+            "        if (Test-Path \"$qqRoaming\\$_\") {",
+            "            Remove-Item \"$qqRoaming\\$_\" -Recurse -Force",
+            "        }",
+            "    }",
+            "}",
+            "Move-Item \"$dir\\Application Data\\Tencent\\TIM\\*\" \"$qqRoaming\" -Force",
+            "Move-Item \"$dir\\Files\\*\" \"$dir\" -Force",
+            "@('Application Data', 'Common', 'Files') | ForEach-Object {",
+            "    Remove-Item \"$dir\\$_\" -Recurse -Force",
+            "}"
+        ]
+    },
+    "uninstaller": {
+        "script": "Remove-Item \"$env:APPDATA\\Tencent\\TIM\" -Recurse -Force"
+    },
     "shortcuts": [
         [
-            "tim.exe",
-            "tim"
+            "Bin\\TIM.exe",
+            "TIM"
         ]
     ],
     "checkver": {
@@ -18,5 +39,5 @@
     "autoupdate": {
         "url": "https://dldir1.qq.com/qqfile/qq/TIM3.1.0/TIM$version.exe#/dl.7z"
     },
-    "notes": "We don't persist your tim data, they are still storaged in '%LOCALAPPDATA%\\Tencent\\tim'."
+    "notes": "We don't persist your TIM data, they are still storaged in '%LOCALAPPDATA%\\Tencent\\TIM'."
 }
